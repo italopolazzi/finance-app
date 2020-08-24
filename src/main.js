@@ -7,6 +7,9 @@ import './registerServiceWorker'
 // global styles
 import '@/assets/styles/index.scss'
 
+// global components
+import '@/components/global'
+
 Vue.config.productionTip = false
 
 
