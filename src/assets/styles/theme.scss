@@ -1,0 +1,23 @@
+:root {
+    font-size: 20px;
+    --size: 0.25rem;
+    --size025: calc(var(--size) * 1);
+    --size050: calc(var(--size) * 2);
+    --size075: calc(var(--size) * 3);
+    --size100: calc(var(--size) * 4);
+    --size125: calc(var(--size) * 5);
+    --size150: calc(var(--size) * 6);
+    --size175: calc(var(--size) * 7);
+    --size200: calc(var(--size) * 8);
+    // media queries
+    --media-xs: #{$xs+"px"};
+    --media-sm: #{$sm+"px"};
+    --media-md: #{$md+"px"};
+    --media-lg: #{$lg+"px"};
+    --media-xl: #{$xl+"px"};
+    // colors
+    --color-foreground: #{$foreground};
+    --color-background: #{$background};
+    --color-text: #{$text};
+    --color-accent: #{$accent};
+}
