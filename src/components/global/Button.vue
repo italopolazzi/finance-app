@@ -12,13 +12,16 @@ export default {
       type: String,
       required: false,
     },
+    text: Boolean
   },
   computed: {
     tag() {
       return this.href ? "a" : "button";
     },
     classes() {
-      return {};
+      return {
+        "button--text": this.text,
+      };
     },
   },
 };
@@ -34,5 +37,10 @@ export default {
   text-transform: uppercase;
   font-weight: bolder;
   border-radius: var(--super-round);
+}
+
+.button--text {
+  border: none;
+  padding: 1em;
 }
 </style>
