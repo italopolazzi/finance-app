@@ -20,4 +20,11 @@
     --color-background: #{$background};
     --color-text: #{$text};
     --color-accent: #{$accent};
+    --color-dark: #{$dark};
+    --color-light: #{$light};
+    --color-error: #{$error};
+    --color-success: #{$success};
+    --color-warning: #{$warning};
+    // utils
+    --super-round: 9999999999px;
 }
