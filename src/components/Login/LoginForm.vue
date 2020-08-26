@@ -1,25 +1,27 @@
 <template>
-  <CustomForm>
-    <fieldset>
-      <legend>Login form</legend>
+  <div class="login-form">
+    <CustomForm>
+      <fieldset>
+        <legend>Login form</legend>
 
-      <div class="custom-form__group">
-        <TextInput label="e-mail" v-model="user.email.value" :validate="user.email.validations" />
-        <TextInput
-          label="password"
-          type="password"
-          v-model="user.password.value"
-          :validate="user.password.validations"
-        />
+        <div class="custom-form__group">
+          <TextInput type="email" label="e-mail" v-model="user.email.value" :validate="user.email.validations" />
+          <TextInput
+            label="password"
+            type="password"
+            v-model="user.password.value"
+            :validate="user.password.validations"
+          />
+        </div>
+      </fieldset>
+
+      <div class="custom-form__actions">
+        <CustomButton size="small">Reset</CustomButton>
+        <Spacer />
+        <CustomButton>Log in</CustomButton>
       </div>
-    </fieldset>
-
-    <div class="custom-form__actions">
-      <CustomButton size="small">Reset</CustomButton>
-      <Spacer />
-      <CustomButton>Log in</CustomButton>
-    </div>
-  </CustomForm>
+    </CustomForm>
+  </div>
 </template>
 
 <script>

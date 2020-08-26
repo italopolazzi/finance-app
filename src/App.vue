@@ -15,3 +15,17 @@
     </Container>
   </div>
 </template>
+
+<style lang="scss" scoped>
+#nav {
+  z-index: 50;
+}
+
+#app {
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+</style>
