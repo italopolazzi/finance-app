@@ -27,4 +27,8 @@
     --color-warning: #{$warning};
     // utils
     --super-round: 9999999999px;
+    // container
+    --container-width: var(--media-lg);
+    // toolbar
+    --toolbar-height: calc(var(--size100) * 4);
 }

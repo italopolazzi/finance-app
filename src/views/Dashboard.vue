@@ -1,7 +1,5 @@
 <template>
   <div class="dashboard-page">
-    <h1>This is an dashboard page</h1>
-
     <SymbolGlobalQuote api-key="demo" symbol="IBM">
       <template v-slot:default="{data}">
         <div class="headline">
