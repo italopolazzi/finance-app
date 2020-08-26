@@ -17,7 +17,11 @@
 
     <IndexMainCompanies :total-companies="10">
       <template v-slot:default="{data}">
-        <CustomTable :keys-items="indexCompaniesLabels" :items="data" />
+        <CustomTable
+          :keys-items="indexCompaniesLabels"
+          :items="data"
+          @rowActionClick="handleTableRowAction"
+        />
       </template>
     </IndexMainCompanies>
   </div>
@@ -33,7 +37,12 @@ import CandlestickChart from "@/components/commom/CandlestickChart.vue";
 
 export default {
   name: "dashboard-page",
-  components: { SymbolGlobalQuote, SymbolHistoricalData, CandlestickChart, IndexMainCompanies },
+  components: {
+    SymbolGlobalQuote,
+    SymbolHistoricalData,
+    CandlestickChart,
+    IndexMainCompanies,
+  },
   data: () => ({
     indexCompaniesLabels: {
       code: "Code",
@@ -45,5 +54,10 @@ export default {
       volume: "Volume",
     },
   }),
+  methods: {
+    handleTableRowAction(v) {
+      
+    },
+  },
 };
 </script>

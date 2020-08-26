@@ -1,9 +1,8 @@
 <template>
-  <div class="custom-table">
-    
+  <div class="custom-table" :class="classes">
     <table>
       <caption v-if="caption">{{caption}}</caption>
-      
+
       <thead>
         <tr>
           <th :key="key" v-for="key in Object.keys(keysItems)">{{ keysItems[key] }}</th>
@@ -11,12 +10,17 @@
       </thead>
 
       <tbody>
-        <tr :key="itemIndex" v-for="(item, itemIndex) in items">
+        <tr
+          :key="itemIndex"
+          v-for="(item, itemIndex) in items"
+          @click="rowActionClickEmit(item)"
+          @keyup.enter="rowActionClickEmit(item)"
+          :tabindex="rowTabIndex"
+        >
           <td :key="index" v-for="(getValue, index) in values">{{getValue(item)}}</td>
         </tr>
       </tbody>
     </table>
-
   </div>
 </template>
 
@@ -44,6 +48,23 @@ export default {
     values() {
       return Object.keys(this.keysItems).map((key) => (item) => item[key]);
     },
+    rowActions() {
+      return !!this.$listeners.rowActionClick;
+    },
+    rowTabIndex() {
+      return this.rowActions ? 0 : undefined;
+    },
+    classes() {
+      return {
+        "custom-table--row-actions": this.rowActions,
+      };
+    },
+  },
+
+  methods: {
+    rowActionClickEmit(item) {
+      this.$emit("rowActionClick", item);
+    },
   },
 };
 </script>
@@ -56,6 +77,10 @@ export default {
 .custom-table {
   width: auto;
   overflow-x: auto;
+}
+
+.custom-table--row-actions tbody tr {
+  cursor: pointer;
 }
 
 .custom-table table {
