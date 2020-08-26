@@ -15,6 +15,11 @@
       </template>
     </SymbolHistoricalData>
 
+    <IndexMainCompanies :total-companies="10">
+      <template v-slot:default="{data}">
+        <CustomTable :keys-items="indexCompaniesLabels" :items="data" />
+      </template>
+    </IndexMainCompanies>
   </div>
 </template>
 
@@ -22,11 +27,23 @@
 <script>
 import SymbolGlobalQuote from "@/components/Dashboard/SymbolGlobalQuote.vue";
 import SymbolHistoricalData from "@/components/Dashboard/SymbolHistoricalData.vue";
+import IndexMainCompanies from "@/components/Dashboard/IndexMainCompanies.vue";
 
 import CandlestickChart from "@/components/commom/CandlestickChart.vue";
 
 export default {
   name: "dashboard-page",
-  components: { SymbolGlobalQuote, SymbolHistoricalData, CandlestickChart },
+  components: { SymbolGlobalQuote, SymbolHistoricalData, CandlestickChart, IndexMainCompanies },
+  data: () => ({
+    indexCompaniesLabels: {
+      code: "Code",
+      currency: "Currency",
+      high: "High",
+      low: "Low",
+      priceopen: "Price Open",
+      closeyest: "Close yesterday",
+      volume: "Volume",
+    },
+  }),
 };
 </script>

@@ -55,7 +55,7 @@ export default {
 
 .custom-table {
   width: auto;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .custom-table table {
