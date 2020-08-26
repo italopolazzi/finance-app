@@ -13,6 +13,12 @@ const components = {
         import ("./CustomForm.vue"),
     'Spacer': () =>
         import ("./Spacer.vue"),
+    'List': () =>
+        import ("./List.vue"),
+    'ListItem': () =>
+        import ("./ListItem.vue"),
+    'CustomTable': () =>
+        import ("./CustomTable.vue"),
 }
 
 Object.entries(components).forEach(([name, component]) => Vue.component(name, component))
