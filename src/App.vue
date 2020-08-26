@@ -3,7 +3,7 @@
     <Toolbar id="nav">
       <ul>
         <li>
-          <router-link to="/">Home</router-link>
+          <router-link to="/login">Login</router-link>
         </li>
         <li>
           <router-link to="/dashboard">Dashboard</router-link>

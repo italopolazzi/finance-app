@@ -2,7 +2,7 @@
 import { Candlestick, mixins } from "vue-chartjs-financial";
 
 export default {
-  name: "CandlestickChart",
+  name: "candlestick-chart",
   extends: Candlestick,
   mixins: [mixins.reactiveProp],
   props: {
@@ -13,4 +13,4 @@ export default {
     this.renderChart(this.chartData, this.options);
   },
 };
-</script>script
+</script>

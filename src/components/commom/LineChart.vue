@@ -2,7 +2,7 @@
 import { Line, mixins } from "vue-chartjs-financial";
 
 export default {
-  name: "LineChart",
+  name: "line-chart",
   extends: Line,
   mixins: [mixins.reactiveProp],
   props: {
@@ -13,4 +13,4 @@ export default {
     this.renderChart(this.chartData, this.options);
   },
 };
-</script>script
+</script>

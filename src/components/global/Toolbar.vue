@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Toolbar",
+  name: "toolbar",
   props: {
     tag: {
       type: String,
@@ -25,8 +25,8 @@ export default {
 .toolbar {
   height: var(--toolbar-height);
   width: 100%;
-  background: var(--color-background);
-  box-shadow: 0 0 20px black;
+  background: var(--color-light-opacity);
+  backdrop-filter: blur(var(--size200));
   position: fixed;
   bottom: 0;
   left: 0;
