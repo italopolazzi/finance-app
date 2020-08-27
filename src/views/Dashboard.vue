@@ -1,42 +1,55 @@
 <template>
   <div class="dashboard-page">
     <!-- SymbolGlobalQuote  -->
-    <SymbolGlobalQuote api-key="demo" symbol="IBM">
-      <template v-slot:default="{data}">
-        <WatchListItem :data="data" />
-      </template>
-    </SymbolGlobalQuote>
-    
+    <section id="headline">
+      <SymbolGlobalQuote api-key="demo" symbol="IBM">
+        <template v-slot:default="{data}">
+          <WatchListItem :data="data" />
+        </template>
+      </SymbolGlobalQuote>
+    </section>
+
     <!-- SymbolHistoricalData -->
-    <SymbolHistoricalData api-key="demo" symbol="IBM">
-      <template v-slot:default="{data}">
-        <CandlestickChart :chart-data="data" />
-      </template>
-    </SymbolHistoricalData>
+    <section id="historical-data">
+      <SymbolHistoricalData api-key="demo" symbol="IBM">
+        <template v-slot:default="{data}">
+          <CandlestickChart :chart-data="data" />
+        </template>
+      </SymbolHistoricalData>
+    </section>
+
+    <!-- SymbolHistoricalData -->
+    <section id="trend-line">
+     
+    </section>
 
     <!-- IndexMainCompanies -->
-    <IndexMainCompanies :total-companies="10">
-      <template v-slot:default="{data}">
-        <CustomTable
-          :keys-items="indexCompaniesLabels"
-          :items="data"
-          @rowActionClick="handleTableRowAction"
-        />
-      </template>
-    </IndexMainCompanies>
+    <section id="top-companies">
+      <IndexMainCompanies :total-companies="10">
+        <template v-slot:default="{data}">
+          <CustomTable
+            :keys-items="indexCompaniesLabels"
+            :items="data"
+            @rowActionClick="handleTableRowAction"
+          />
+        </template>
+      </IndexMainCompanies>
+    </section>
 
     <!-- UserWatchList -->
-    <UserWatchList v-if="isAuthenticated">
-      <template v-slot:default="{data}">
-        <List :items="data">
-          <template v-slot:item="{data}">
-            <WatchListItem :data="data">
-              <CustomButton slot="action" color="dark">Remove</CustomButton>
-            </WatchListItem>
-          </template>
-        </List>
-      </template>
-    </UserWatchList>
+    <section id="watch-list" v-if="isAuthenticated">
+      <UserWatchList>
+        <template v-slot:default="{data}">
+          <List :items="data">
+            <template v-slot:item="{data}">
+              <WatchListItem :data="data">
+                <CustomButton slot="action" color="dark">Remove</CustomButton>
+              </WatchListItem>
+            </template>
+          </List>
+        </template>
+      </UserWatchList>
+    </section>
   </div>
 </template>
 
@@ -51,6 +64,8 @@ import WatchListItem from "@/components/Dashboard/WatchListItem.vue";
 import CandlestickChart from "@/components/commom/CandlestickChart.vue";
 
 import { mapGetters } from "vuex";
+
+import "@/assets/styles/dashboard.scss"
 
 export default {
   name: "dashboard-page",

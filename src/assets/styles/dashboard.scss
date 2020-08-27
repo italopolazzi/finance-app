@@ -1,0 +1,35 @@
+.dashboard-page,
+.dashboard-symbol {
+    display: grid;
+    grid-template-areas: "headline historical" "watch trend" "top top";
+    grid-template-columns: 60% 40%;
+    grid-template-rows: auto auto auto;
+}
+
+#headline {
+    grid-area: headline;
+}
+
+#historical-data {
+    grid-area: historical;
+}
+
+#trend-line {
+    grid-area: trend;
+}
+
+#top-companies {
+    grid-area: top;
+}
+
+#watch-list {
+    grid-area: watch;
+}
+
+@media (max-width: #{$lg+"px"}) {
+    .dashboard-page {
+        grid-template-areas: "headline" "watch" "historical" "trend" "top";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+}

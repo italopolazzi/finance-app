@@ -28,7 +28,7 @@ export default {
   background: var(--color-light-opacity);
   backdrop-filter: blur(var(--size200));
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
   display: flex;

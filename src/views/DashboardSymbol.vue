@@ -7,20 +7,25 @@
     </template>
 
     <template v-else>
-      <SymbolGlobalQuote api-key="demo" :symbol="symbol">
-        <template v-slot:default="{data}">
-          <div class="headline">
-            <h1>{{data.price}}</h1>
-            <h5>{{data.change}}</h5>
-          </div>
-        </template>
-      </SymbolGlobalQuote>
+      <section id="headline">
+        <SymbolGlobalQuote api-key="demo" :symbol="symbol">
+          <template v-slot:default="{data}">
+            <div class="headline">
+              <h1>{{data.price}}</h1>
+              <h5>{{data.change}}</h5>
+            </div>
+          </template>
+        </SymbolGlobalQuote>
+      </section>
 
-      <SymbolHistoricalData api-key="demo" :symbol="symbol">
-        <template v-slot:default="{data}">
-          <CandlestickChart :chart-data="data" />
-        </template>
-      </SymbolHistoricalData>
+      <section id="historical-data">
+        <SymbolHistoricalData api-key="demo" :symbol="symbol">
+          <template v-slot:default="{data}">
+            <CandlestickChart :chart-data="data" />
+          </template>
+        </SymbolHistoricalData>
+      </section>
+
     </template>
   </div>
 </template>
@@ -31,6 +36,8 @@ import SymbolGlobalQuote from "@/components/Dashboard/SymbolGlobalQuote.vue";
 import SymbolHistoricalData from "@/components/Dashboard/SymbolHistoricalData.vue";
 
 import CandlestickChart from "@/components/commom/CandlestickChart.vue";
+
+import "@/assets/styles/dashboard.scss"
 
 export default {
   name: "dashboard-symbol",
@@ -52,10 +59,11 @@ export default {
     // simulating a invalid request
 
     if (to.params.symbol === "IBM") next();
-
-    next((vm) => {
-      vm.error = new Error(`Invalid Symbol ${vm.symbol}`);
-    });
+    else {
+      next((vm) => {
+        vm.error = new Error(`Invalid Symbol ${vm.symbol}`);
+      });
+    }
   },
 
   methods: {

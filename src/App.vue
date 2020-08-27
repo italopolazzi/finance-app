@@ -10,7 +10,7 @@
         </li>
       </ul>
     </Toolbar>
-    <Container>
+    <Container id="main-content">
       <router-view />
     </Container>
   </div>
@@ -22,10 +22,13 @@
 }
 
 #app {
-
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
+}
+
+#main-content {
+    margin-top: var(--toolbar-height);
 }
 </style>
