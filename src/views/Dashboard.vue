@@ -13,15 +13,14 @@
     <section id="historical-data">
       <SymbolHistoricalData api-key="demo" symbol="IBM">
         <template v-slot:default="{data}">
-          <CandlestickChart :chart-data="data" />
+          <CandlestickChart :chart-data="data.chandlestickData" />
+          <LineChart :chart-data="data.lineData" />
         </template>
       </SymbolHistoricalData>
     </section>
 
     <!-- SymbolHistoricalData -->
-    <section id="trend-line">
-     
-    </section>
+    <section id="trend-line"></section>
 
     <!-- IndexMainCompanies -->
     <section id="top-companies">
@@ -62,20 +61,22 @@ import UserWatchList from "@/components/Dashboard/UserWatchList.vue";
 import WatchListItem from "@/components/Dashboard/WatchListItem.vue";
 
 import CandlestickChart from "@/components/commom/CandlestickChart.vue";
+import LineChart from "@/components/commom/LineChart.vue";
 
 import { mapGetters } from "vuex";
 
-import "@/assets/styles/dashboard.scss"
+import "@/assets/styles/dashboard.scss";
 
 export default {
   name: "dashboard-page",
   components: {
     SymbolGlobalQuote,
     SymbolHistoricalData,
-    CandlestickChart,
     IndexMainCompanies,
     UserWatchList,
     WatchListItem,
+    CandlestickChart,
+    LineChart,
   },
   computed: {
     ...mapGetters("auth", ["isAuthenticated"]),
