@@ -21,7 +21,7 @@ const routes = [{
     },
     {
         path: '/dashboard/:symbol',
-        name: "dashboard-stock-details",
+        name: "dashboard-symbol",
         component: () =>
             import ( /* webpackChunkName: "dashboard" */ '@/views/DashboardSymbol.vue')
     }

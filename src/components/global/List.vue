@@ -1,6 +1,8 @@
 <template>
   <div class="list" role="list">
-    <slot />
+    <ListItem v-for="(item, itemIndex) in items" :key="itemIndex">
+      <slot name="item" :data="item" />
+    </ListItem>
   </div>
 </template>
 
@@ -10,10 +12,15 @@ export default {
   props: {
     tag: {
       type: String,
-      required: true,
+      required: false,
+      default: "ul",
       validator(v) {
         return ["ul", "ol", "dl"].includes(v);
       },
+    },
+    items: {
+      type: Array,
+      required: true,
     },
   },
   computed: {

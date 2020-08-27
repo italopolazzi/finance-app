@@ -20,6 +20,25 @@ export default {
         return ["small", "large"].includes(v);
       },
     },
+
+    color: {
+      type: String,
+      required: false,
+      default: "accent",
+      validator(v) {
+        return [
+          "foreground",
+          "background",
+          "text",
+          "accent",
+          "dark",
+          "light",
+          "error",
+          "success",
+          "warning",
+        ].includes(v);
+      },
+    },
   },
   computed: {
     tag() {
@@ -30,6 +49,7 @@ export default {
         "button--text": this.text,
         "button--small": this.size === "small",
         "button--large": this.size === "large",
+        [`button--${this.color}`]: true,
       };
     },
   },
@@ -46,10 +66,7 @@ export default {
   text-transform: uppercase;
   font-weight: bolder;
   border-radius: var(--size050);
-}
-
-.button {
-  font-size: var(--text-sm);
+  cursor: pointer;
 }
 
 .button--small {
@@ -67,6 +84,24 @@ export default {
 
 .button:hover,
 .button:focus {
-  border: solid var(--color-accent);
+  border: solid currentColor;
+}
+
+$colors: (
+  "foreground",
+  "background",
+  "text",
+  "accent",
+  "dark",
+  "light",
+  "error",
+  "success",
+  "warning"
+);
+
+@each $color in $colors {
+  .button--#{$color} {
+    color: var(--color-#{$color});
+  }
 }
 </style>

@@ -113,6 +113,10 @@ export default {
     if (window) window.removeEventListener("keydown", this.handleKeyDown);
   },
 
+  destroyed(){
+    document.documentElement.classList.remove("has-dialog")
+  },
+
   // ---------------------------------------------------
   // methods
   // ---------------------------------------------------

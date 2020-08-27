@@ -1,7 +1,22 @@
-const initialState = {}
+function getStorage() {
+    // fallback if the browser does not support localStorage
+    return localStorage ? localStorage : sessionStorage
+}
 
-if (localStorage) {
-    initialState.authToken = "true" === localStorage.getItem("authToken")
+function getLocalAuthToken() {
+    return getStorage().getItem("authToken")
+}
+
+function setLocalAuthToken(token) {
+    getStorage().setItem("authToken", token)
+}
+
+function removeLocalAuthToken() {
+    getStorage().removeItem("authToken")
+}
+
+const initialState = {
+    authToken: getLocalAuthToken()
 }
 
 const store = {
@@ -21,24 +36,18 @@ const store = {
         login({ commit }) {
             try {
                 commit("AUTH_LOGIN")
-                if (localStorage) {
-                    localStorage.setItem("authToken", true)
-                }
+                setLocalAuthToken(true)
             } catch (error) {
-                if (localStorage) {
-                    localStorage.removeItem("authToken")
-                }
+                removeLocalAuthToken()
             }
         },
         logout({ commit }) {
             commit("AUTH_LOGOUT")
-            if (localStorage) {
-                localStorage.removeItem("authToken")
-            }
+            removeLocalAuthToken()
         },
     },
     getters: {
-        isAuthenticated: state => state.authToken
+        isAuthenticated: state => !!state.authToken
     }
 }
 
