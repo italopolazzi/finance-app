@@ -6,7 +6,7 @@
         <div class="code text-sm">{{data.code}}</div>
         <div class="price text-xl">{{data.price}}</div>
       </div>
-      <div class="text-caption">
+      <div class="text-caption" v-if="data.currency">
         <div class="currency">{{data.currency}}</div>
       </div>
     </div>
@@ -25,9 +25,9 @@
         <tbody>
           <tr>
             <td class="high">{{data.high}}</td>
-            <td class="open">{{data.priceopen}}</td>
+            <td class="open">{{data.open}}</td>
             <td class="low">{{data.low}}</td>
-            <td class="close">{{data.closeyest}}</td>
+            <td class="close">{{data.close}}</td>
           </tr>
         </tbody>
       </table>
@@ -64,19 +64,6 @@ export default {
   grid-template-areas: "headline ohlc action";
   grid-template-columns: 2fr 1fr auto;
   grid-template-rows: auto;
-}
-
-@media screen and (max-width: #{$md+"px"}) {
-  .watch-list-item {
-    grid-template-areas: "headline ohlc " ". action";
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto auto;
-  }
-
-  .watch-list-item__ohlc,
-  .watch-list-item__action {
-    justify-self: end;
-  }
 }
 
 .watch-list-item__headline {
@@ -144,5 +131,22 @@ table td {
 }
 .currency:after {
   content: ")";
+}
+
+@media screen and (max-width: #{$md+"px"}) {
+  .watch-list-item {
+    grid-template-areas: "headline ohlc " ". action";
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .watch-list-item__ohlc,
+  .watch-list-item__action {
+    justify-self: end;
+  }
+
+  .symbol .price {
+    font-size: 3em;
+  }
 }
 </style>

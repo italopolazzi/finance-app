@@ -3,12 +3,10 @@
     <!-- SymbolGlobalQuote  -->
     <SymbolGlobalQuote api-key="demo" symbol="IBM">
       <template v-slot:default="{data}">
-        <div class="headline">
-          <h1>{{data.price}}</h1>
-          <h5>{{data.change}}</h5>
-        </div>
+        <WatchListItem :data="data" />
       </template>
     </SymbolGlobalQuote>
+    
     <!-- SymbolHistoricalData -->
     <SymbolHistoricalData api-key="demo" symbol="IBM">
       <template v-slot:default="{data}">
