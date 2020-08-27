@@ -19,6 +19,8 @@ const components = {
         import ("./ListItem.vue"),
     'CustomTable': () =>
         import ("./CustomTable.vue"),
+    'Dialog': () =>
+        import ("./Dialog.vue"),
 }
 
 Object.entries(components).forEach(([name, component]) => Vue.component(name, component))

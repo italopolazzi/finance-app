@@ -56,7 +56,7 @@ export default {
   }),
   methods: {
     handleTableRowAction(v) {
-      
+      console.log(v);
     },
   },
 };

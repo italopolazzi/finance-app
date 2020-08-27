@@ -16,10 +16,17 @@ const routes = [{
     },
     {
         path: '/dashboard',
-        name: 'Dashboard',
+        name: 'dashboard',
         component: Dashboard
+    },
+    {
+        path: '/dashboard/:symbol',
+        name: "dashboard-stock-details",
+        component: () =>
+            import ( /* webpackChunkName: "dashboard" */ '@/views/DashboardSymbol.vue')
     }
 ]
+
 
 const router = new VueRouter({
     routes
