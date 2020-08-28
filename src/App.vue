@@ -29,12 +29,14 @@
 
       <!-- <div class="toolbar-item">
         <CustomButton color="light">Dark</CustomButton>
-      </div> -->
+      </div>-->
     </Toolbar>
 
-    <Container id="main-content">
-      <router-view />
-    </Container>
+    <transition appear mode="out-in" :name="pageTransitionName">
+      <Container id="main-content" :key="$route.path">
+        <router-view />
+      </Container>
+    </transition>
   </div>
 </template>
 
@@ -50,10 +52,32 @@ export default {
     Logo,
   },
 
+  data: () => ({
+    pageTransitionName: null,
+  }),
+
   computed: {
     ...mapState(["globalMessages"]),
     haveMessages() {
       return this.globalMessages.length;
+    },
+  },
+
+  methods: {
+    setRandomPageTransitionName() {
+      const transitions = ["slide", "edils"];
+      const random = Math.round(Math.random());
+      console.log(random);
+      this.pageTransitionName = transitions[random];
+    },
+  },
+
+  watch: {
+    ["$route.path"]: {
+      immediate: true,
+      handler() {
+        this.setRandomPageTransitionName();
+      },
     },
   },
 };

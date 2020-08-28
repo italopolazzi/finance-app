@@ -1,0 +1,32 @@
+.edils-enter,
+.edils-leave-to,
+.slide-enter,
+.slide-leave-to {
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.edils-enter,
+.edils-leave-to {
+    transform: translateX(-100%);
+}
+
+.slide-enter,
+.slide-leave-to {
+    transform: translateX(100%);
+}
+
+.edils-leave,
+.edils-enter-to,
+.slide-leave,
+.slide-enter-to {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.edils-enter-active,
+.edils-leave-active,
+.slide-enter-active,
+.slide-leave-active {
+    transition: all 0.4s ease;
+}
