@@ -10,6 +10,9 @@ import '@/assets/styles/index.scss'
 // global components
 import '@/components/global'
 
+// Vue plugins
+import '@/plugins/vueFaker'
+
 Vue.config.productionTip = false
 
 Vue.mixin({

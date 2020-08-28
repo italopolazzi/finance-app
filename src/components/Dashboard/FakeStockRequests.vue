@@ -33,17 +33,6 @@ export default {
       required: false,
       default: 60 * 1000,
     },
-    fetchOptions: {
-      type: Object,
-      required: false,
-    },
-  },
-
-  computed: {
-    requestUrl() {
-      // to override
-      return "api/url";
-    },
   },
 
   data: () => ({
@@ -80,23 +69,21 @@ export default {
 
     async doApiRequest() {
       try {
-        const response = await fetch(this.requestUrl, this.fetchOptions);
-        const data = await response.json();
+        const data = this.getFakeData();
         this.lastData = await this.processApiData(data);
       } catch (error) {
         this.error = error;
       }
     },
 
+    getFakeData() {
+      // to override
+      return null;
+    },
+
     processApiData(data) {
       // to override
-      return new Promise((resolve, reject) => {
-        try {
-          resolve(data);
-        } catch (error) {
-          reject(error);
-        }
-      });
+      return data;
     },
   },
 };

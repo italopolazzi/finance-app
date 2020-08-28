@@ -2,11 +2,17 @@
   <div class="dashboard-page">
     <!-- SymbolGlobalQuote  -->
     <section id="headline">
-      <SymbolGlobalQuote api-key="demo" symbol="IBM">
+      <!-- <SymbolGlobalQuote api-key="demo" symbol="IBM">
         <template v-slot:default="{data}">
           <WatchListItem :data="data" />
         </template>
-      </SymbolGlobalQuote>
+      </SymbolGlobalQuote>-->
+
+      <FakeWatchList :companies="['IBOVESPA']" :milliseconds="3000">
+        <template v-slot:default="{data}">
+          <WatchListItem :data="data[0]" />
+        </template>
+      </FakeWatchList>
     </section>
 
     <!-- SymbolHistoricalData -->
@@ -36,8 +42,8 @@
     </section>
 
     <!-- UserWatchList -->
-    <section id="watch-list" v-if="isAuthenticated">
-      <UserWatchList>
+    <section id="watch-list">
+      <FakeWatchList>
         <template v-slot:default="{data}">
           <List :items="data">
             <template v-slot:item="{data}">
@@ -47,17 +53,20 @@
             </template>
           </List>
         </template>
-      </UserWatchList>
+      </FakeWatchList>
     </section>
   </div>
 </template>
 
 
 <script>
-import SymbolGlobalQuote from "@/components/Dashboard/SymbolGlobalQuote.vue";
+// simulate requests using setInteval and the lib faker.js
+import FakeWatchList from "@/components/Dashboard/FakeWatchList.vue";
+
+// import SymbolGlobalQuote from "@/components/Dashboard/SymbolGlobalQuote.vue";
 import SymbolHistoricalData from "@/components/Dashboard/SymbolHistoricalData.vue";
 import IndexMainCompanies from "@/components/Dashboard/IndexMainCompanies.vue";
-import UserWatchList from "@/components/Dashboard/UserWatchList.vue";
+// import UserWatchList from "@/components/Dashboard/UserWatchList.vue";
 import WatchListItem from "@/components/Dashboard/WatchListItem.vue";
 
 import CandlestickChart from "@/components/commom/CandlestickChart.vue";
@@ -70,17 +79,34 @@ import "@/assets/styles/dashboard.scss";
 export default {
   name: "dashboard-page",
   components: {
-    SymbolGlobalQuote,
+    FakeWatchList,
+
+    // SymbolGlobalQuote,
     SymbolHistoricalData,
     IndexMainCompanies,
-    UserWatchList,
+    // UserWatchList,
     WatchListItem,
+
     CandlestickChart,
     LineChart,
   },
+
   computed: {
     ...mapGetters("auth", ["isAuthenticated"]),
+    watchListFetchOptions() {
+      const headers = new Headers();
+      headers.append("pragma", "no-cache");
+      headers.append("cache-control", "no-cache");
+
+      const fetchOptions = {
+        method: "GET",
+        headers: headers,
+      };
+
+      return fetchOptions;
+    },
   },
+
   data: () => ({
     indexCompaniesLabels: {
       code: "Code",

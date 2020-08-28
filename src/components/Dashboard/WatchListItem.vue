@@ -4,9 +4,11 @@
     <div class="watch-list-item__headline">
       <div class="symbol">
         <div class="code text-sm">{{data.code}}</div>
-        <div class="price text-xl">{{data.price}}</div>
+        <div class="price text-xl">
+          <DynamicNumber :number="data.price | price" />
+        </div>
       </div>
-      <div class="text-caption" v-if="data.currency">
+      <div class="text-caption">
         <div class="currency">{{data.currency}}</div>
       </div>
     </div>
@@ -24,10 +26,18 @@
 
         <tbody>
           <tr>
-            <td class="high">{{data.high}}</td>
-            <td class="open">{{data.open}}</td>
-            <td class="low">{{data.low}}</td>
-            <td class="close">{{data.close}}</td>
+            <td class="high">
+              <DynamicNumber :number="data.high | price" />
+            </td>
+            <td class="open">
+              <DynamicNumber :number="data.open | price" />
+            </td>
+            <td class="low">
+              <DynamicNumber :number="data.low | price" />
+            </td>
+            <td class="close">
+              <DynamicNumber :number="data.close | price" />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -41,8 +51,20 @@
 
 
 <script>
+import DynamicNumber from "@/components/Dashboard/DynamicNumber.vue";
+
 export default {
   name: "watch-list-item",
+
+  components: {
+    DynamicNumber,
+  },
+
+  filters: {
+    price(v) {
+      return parseFloat(v).toFixed(2);
+    },
+  },
   // functional: true,
   props: {
     data: {

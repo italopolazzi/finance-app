@@ -11,7 +11,7 @@ export default {
 
   computed: {
     requestUrl() {
-      return ``;
+      return "https://7247000e-7bad-488d-81d2-777b186efae6.mock.pstmn.io/user/1/watchlist";
     },
   },
 
@@ -24,9 +24,9 @@ export default {
         try {
           if (!data) throw Error("No data received");
 
-          const items = data;
+          const watchList = data.watchList;
 
-          resolve(items);
+          resolve(watchList);
         } catch (error) {
           reject(error);
         }
