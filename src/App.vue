@@ -15,7 +15,7 @@
       </ul>
     </Toolbar>
 
-    <Container>
+    <Container id="main-content">
       <router-view />
     </Container>
   </div>
@@ -45,7 +45,7 @@ export default {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 100vh;
+  // min-height: 100vh;
 }
 
 #main-content {
