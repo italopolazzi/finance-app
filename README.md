@@ -6,25 +6,37 @@ tags: [Vue, API, Stocks, Vuex, SASS]
 
 ### Principais detalhes
 
+#### Tema
+
 `theme.config.js`
 Arquivo de entrada para configurações para cores e breakpoints que vão ser utilizados ao longo da aplicação.
 
+`src/assets/styles`
+Pasta contendo arquivos de estilos com SCSS. No arquivo principal `theme.scss` são definidos os estilos utilizando variáveis CSS juntamente com as do SCSS. As variáveis de cores e breakpoints são as mesma pré-injetas com o arquivo `theme.config.js`.
+Para este projeto optei por não utilizar nenhum framework de estilos.
+
+#### Processamento Multi-Thread
+
 `src/workers`
 Web workers da aplicação. Com a ajuda do loader "comlink-loader" é possível criar métodos assíncronos que podem ser exportados para toda a aplicação. Os dados retornados serão processados como em "postMessage".
-
-`src/plugins/vueFaker.js`
-Biblioteca utilizada para criar dados randômicos, como os preços das ações. Foi utilizado como solução alternativa para não realizar múltiplas requisições em APIs de terceiros e em detrimento da AlphaVantage não estar mais funcionando para dados da Ibovespa.
-
-`src/views`
-A aplicação consiste de 3 views, uma para login, um painel principal e a terceira exibe detalhes de uma empresa em específico.
 
 `utils/regression.js`
 Código da Regressão Linear Simples, utilizado para identificar a reta de tendência dos dados históricos de cotações. Para encontrar os coeficientes foram utilizadas amostras das médias entre valores de alta e baixa das cotações.
 O código é executado dentro de um Worker que também é responsável por normalizar os dados da API. Tendo-se encontrado os coeficientes é então gerado pontos de forma linear.
 
-`src/assets/styles`
-Pasta contendo arquivos de estilos com SCSS. No arquivo principal `theme.scss` são definidos os estilos utilizando variáveis CSS juntamente com as do SCSS. As variáveis de cores e breakpoints são as mesma pré-injetas com o arquivo `theme.config.js`.
-Para este projeto optei por não utilizar nenhum framework de estilos.
+
+#### Dados alternativos/randômicos
+
+`src/plugins/vueFaker.js`
+Biblioteca utilizada para criar dados randômicos, como os preços das ações. Foi utilizado como solução alternativa para não realizar múltiplas requisições em APIs de terceiros e em detrimento da AlphaVantage não estar mais funcionando para dados da Ibovespa.
+
+#### Views
+
+`src/views`
+A aplicação consiste de 3 views, uma para login, um painel principal e a terceira exibe detalhes de uma empresa em específico.
+
+
+#### Componentes
 
 `src/components/common`
 Componentes que irão aparecer em mais de uma view.
@@ -37,6 +49,8 @@ Componentes customizados de tags HTML ou que possuem características mais gené
 
 `src/components/Login`
 Formulário de autentificação.
+
+#### Store
 
 `src/store`
 Módulo principal da aplicação, foi utilizado para exibir mensagens de alerta informativas sobre ações do usuário.
