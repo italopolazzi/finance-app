@@ -25,9 +25,6 @@
       </SymbolHistoricalData>
     </section>
 
-    <!-- SymbolHistoricalData -->
-    <section id="trend-line"></section>
-
     <!-- IndexMainCompanies -->
     <section id="top-companies">
       <IndexMainCompanies :total-companies="10">
@@ -42,13 +39,17 @@
     </section>
 
     <!-- UserWatchList -->
-    <section id="watch-list" v-if="isAuthenticated">
-      <FakeWatchList>
+    <section id="watch-list">
+      <FakeWatchList :companies="watchList" :key="watchList.length">
         <template v-slot:default="{data}">
           <List :items="data">
             <template v-slot:item="{data}">
               <WatchListItem :data="data">
-                <CustomButton slot="action" color="dark">Remove</CustomButton>
+                <CustomButton
+                  @click="removeCompanyFromWatchList(data.code)"
+                  slot="action"
+                  color="dark"
+                >Remove</CustomButton>
               </WatchListItem>
             </template>
           </List>
@@ -72,7 +73,7 @@ import WatchListItem from "@/components/Dashboard/WatchListItem.vue";
 import CandlestickChart from "@/components/commom/CandlestickChart.vue";
 import LineChart from "@/components/commom/LineChart.vue";
 
-import { mapGetters } from "vuex";
+import { mapGetters, mapState, mapActions } from "vuex";
 
 import "@/assets/styles/dashboard.scss";
 
@@ -92,6 +93,7 @@ export default {
   },
 
   computed: {
+    ...mapState("user", ["watchList"]),
     ...mapGetters("auth", ["isAuthenticated"]),
     watchListFetchOptions() {
       const headers = new Headers();
@@ -120,6 +122,7 @@ export default {
   }),
 
   methods: {
+    ...mapActions("user", ["removeCompanyFromWatchList"]),
     handleTableRowAction(item) {
       this.$router.push({
         name: "dashboard-symbol",

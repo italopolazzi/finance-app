@@ -13,21 +13,16 @@ export default {
 
   props: {
     number: {
-      type: Number,
+      type: [Number, String],
       required: true,
     },
   },
 
   computed: {
-    classes(){
-      return { positive: this.number > 0, negative: this.number < 0 }
-    }
+    classes() {
+      return { positive: this.number > 0, negative: this.number < 0 };
+    },
   },
-
-  data: () => ({
-    number: 0,
-  }),
-
 };
 </script>
 

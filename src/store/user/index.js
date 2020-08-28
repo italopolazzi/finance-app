@@ -47,7 +47,7 @@ const store = {
             try {
                 const isAuthenticated = rootGetters["auth/isAuthenticated"]
                 if (!isAuthenticated) throw Error("User not authenticated!")
-                if (getters.isCompanyWatched(company)) return;
+                if (getters.isCompanyWatched(company)) throw Error("Company already listed in watch list!")
 
                 const message = await simulateResolveRequest({
                     text: "Company added to watch list"
@@ -55,16 +55,16 @@ const store = {
 
                 commit("PUSH_WATCHLIST", company)
 
-                dispatch("pushGlobalSuccessMessage", message.text)
+                dispatch("pushGlobalSuccessMessage", message.text, { root: true })
             } catch (error) {
-                dispatch("pushGlobalErrorMessage", error.message)
+                dispatch("pushGlobalErrorMessage", error.message, { root: true })
             }
         },
         async removeCompanyFromWatchList({ dispatch, commit, getters, rootGetters }, company) {
             try {
                 const isAuthenticated = rootGetters["auth/isAuthenticated"]
                 if (!isAuthenticated) throw Error("User not authenticated!")
-                if (getters.isCompanyWatched(company)) return;
+                if (!getters.isCompanyWatched(company)) throw Error("Company not listed in watch list!")
 
 
                 const message = await simulateResolveRequest({
@@ -72,9 +72,9 @@ const store = {
                 })
                 commit("POP_WATCHLIST", company)
 
-                dispatch("pushGlobalSuccessMessage", message.text)
+                dispatch("pushGlobalSuccessMessage", message.text, { root: true })
             } catch (error) {
-                dispatch("pushGlobalErrorMessage", error.message)
+                dispatch("pushGlobalErrorMessage", error.message, { root: true })
             }
         },
         startUserData({ commit }) {
