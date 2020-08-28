@@ -60,6 +60,9 @@ export default {
         input.reset();
       });
     },
+    validate() {
+      return this.valid;
+    },
   },
 
   // ---------------------------------------------------
@@ -83,42 +86,43 @@ export default {
 
 <style lang="scss" scoped>
 .custom-form {
-    display: flex;
-    flex-flow: column nowrap;
-/*     background: var(--color-background); */
-    background: var(--color-background);
-    border: solid var(--color-light-opacity);
+  display: flex;
+  flex-flow: column nowrap;
+  /*     background: var(--color-background); */
+  background: var(--color-background);
+  border: solid var(--color-light-opacity);
 }
 
 .custom-form .text-input:not(:last-child) {
-    margin-bottom: var(--size100);
+  margin-bottom: var(--size100);
 }
 
 .custom-form legend {
-    padding: var(--size100);
-    width: 100%;
-    background: var(--color-foreground)
+  padding: var(--size100);
+  width: 100%;
+  background: var(--color-foreground);
 }
 
 .custom-form.custom-form--invalid legend {
-    background: var(--color-error)
+  background: var(--color-error);
 }
 
-.custom-form__group, .custom-form__actions {
-    padding: var(--size100);
+.custom-form__group,
+.custom-form__actions {
+  padding: var(--size100);
 }
 
 .custom-form__actions {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .custom-form--invalid {
-    animation: shake .25s linear;
-    animation-iteration-count: 3;
-    will-change: transform;
-    transform: translateX(0);
+  animation: shake 0.25s linear;
+  animation-iteration-count: 3;
+  will-change: transform;
+  transform: translateX(0);
 }
 </style>

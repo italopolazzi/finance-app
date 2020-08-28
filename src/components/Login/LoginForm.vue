@@ -1,11 +1,16 @@
 <template>
   <div class="login-form">
-    <CustomForm>
+    <CustomForm ref="form">
       <fieldset>
         <legend>Login form</legend>
 
         <div class="custom-form__group">
-          <TextInput type="email" label="e-mail" v-model="user.email.value" :validate="user.email.validations" />
+          <TextInput
+            type="email"
+            label="e-mail"
+            v-model="user.email.value"
+            :validate="user.email.validations"
+          />
           <TextInput
             label="password"
             type="password"
@@ -16,9 +21,9 @@
       </fieldset>
 
       <div class="custom-form__actions">
-        <CustomButton size="small">Reset</CustomButton>
+        <CustomButton size="small" @click="resetForm">Reset</CustomButton>
         <Spacer />
-        <CustomButton>Log in</CustomButton>
+        <CustomButton @click="login">Log in</CustomButton>
       </div>
     </CustomForm>
   </div>
@@ -48,6 +53,19 @@ export default {
       },
     },
   }),
+
+  methods: {
+    resetForm() {
+      this.$refs.form.reset();
+    },
+    login() {
+      console.log(this.$refs.form.validate());
+      if (this.$refs.form.validate()) {
+        this.$store.dispatch("auth/login");
+        this.$router.push({ name: "dashboard" });
+      }
+    },
+  },
 };
 </script>
 

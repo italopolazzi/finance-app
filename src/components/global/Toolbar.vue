@@ -33,7 +33,19 @@ export default {
   right: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+}
+
+@media (max-width: #{$lg+"px"}) {
+  .toolbar button {
+    font-size: var(--size050);
+  }
+  .toolbar h1 {
+    font-size: var(--size100);
+  }
+  .toolbar .logo {
+    display: none;
+  }
 }
 </style>
 

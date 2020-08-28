@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="dark">
+  <div id="app" class="light">
     <template v-if="haveMessages">
       <Toasts v-model="globalMessages" />
     </template>
@@ -16,13 +16,17 @@
       <ul class="toolbar-item">
         <li>
           <router-link to="/dashboard">
-            <CustomButton color="light">Dashboard</CustomButton>
+            <CustomButton size="small" color="light">Dashboard</CustomButton>
           </router-link>
         </li>
 
         <li>
-          <router-link to="/">
-            <CustomButton color="light">Login</CustomButton>
+          <router-link v-if="isAuthenticated" to="/logout">
+            <CustomButton size="small" color="light">Logout</CustomButton>
+          </router-link>
+
+          <router-link v-else to="/">
+            <CustomButton color="light">Log in</CustomButton>
           </router-link>
         </li>
       </ul>
@@ -43,7 +47,7 @@
 <script>
 import Logo from "@/components/commom/Logo.vue";
 
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "app",
@@ -58,6 +62,7 @@ export default {
 
   computed: {
     ...mapState(["globalMessages"]),
+    ...mapGetters("auth", ["isAuthenticated"]),
     haveMessages() {
       return this.globalMessages.length;
     },

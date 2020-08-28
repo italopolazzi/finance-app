@@ -30,6 +30,7 @@
     <!-- IndexMainCompanies -->
     <section id="top-companies">
       <h2 class="section-title">Index Main Companies</h2>
+      <p>Select one to open details</p>
       <IndexMainCompanies :total-companies="10">
         <template v-slot:default="{data}">
           <CustomTable
