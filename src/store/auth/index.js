@@ -33,18 +33,25 @@ const store = {
         }
     },
     actions: {
-        login({ commit }) {
+        login({ commit, dispatch }) {
             try {
                 commit("AUTH_LOGIN")
                 setLocalAuthToken(true)
+                dispatch("user/startUserData", null, { root: true })
+                    // dispatch("user/startUserData", null, { root: true })
             } catch (error) {
                 removeLocalAuthToken()
             }
         },
-        logout({ commit }) {
-            commit("AUTH_LOGOUT")
-            removeLocalAuthToken()
-        },
+        logout({ commit, dispatch }) {
+            try {
+                commit("AUTH_LOGOUT")
+                dispatch("user/clearUserData", null, { root: true })
+                    // dispatch("user/clearUserData", null, { root: true })
+            } catch (error) {
+                removeLocalAuthToken()
+            }
+        }
     },
     getters: {
         isAuthenticated: state => !!state.authToken

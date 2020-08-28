@@ -42,7 +42,7 @@
     </section>
 
     <!-- UserWatchList -->
-    <section id="watch-list">
+    <section id="watch-list" v-if="isAuthenticated">
       <FakeWatchList>
         <template v-slot:default="{data}">
           <List :items="data">
