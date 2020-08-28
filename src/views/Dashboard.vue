@@ -7,6 +7,7 @@
           <WatchListItem :data="data" />
         </template>
       </SymbolGlobalQuote>-->
+      <h2 class="section-title">Index</h2>
 
       <FakeWatchList :companies="['IBOVESPA']" :milliseconds="3000">
         <template v-slot:default="{data}">
@@ -17,6 +18,7 @@
 
     <!-- SymbolHistoricalData -->
     <section id="historical-data">
+      <h2 class="section-title">Historical Data</h2>
       <SymbolHistoricalData api-key="demo" symbol="IBM">
         <template v-slot:default="{data}">
           <CandlestickChart :chart-data="data.chandlestickData" />
@@ -27,6 +29,7 @@
 
     <!-- IndexMainCompanies -->
     <section id="top-companies">
+      <h2 class="section-title">Index Main Companies</h2>
       <IndexMainCompanies :total-companies="10">
         <template v-slot:default="{data}">
           <CustomTable
@@ -40,7 +43,8 @@
 
     <!-- UserWatchList -->
     <section id="watch-list">
-      <FakeWatchList :companies="watchList" :key="watchList.length">
+      <h2 class="section-title">Watch List</h2>
+      <FakeWatchList v-if="isAuthenticated" :companies="watchList" :key="watchList.length">
         <template v-slot:default="{data}">
           <List :items="data">
             <template v-slot:item="{data}">
@@ -51,6 +55,11 @@
           </List>
         </template>
       </FakeWatchList>
+
+      <template v-else>
+        <div>Log In to see your WatchList</div>
+        <router-link to="login">Login</router-link>
+      </template>
     </section>
   </div>
 </template>

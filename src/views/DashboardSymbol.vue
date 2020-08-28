@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard-symbol">
-    <template v-if="error">
+    <!-- <template v-if="error">
       <Dialog :value="error" :dialog-title="error.message">
         <CustomButton @click="backToDashboard">Back to dashboard</CustomButton>
       </Dialog>
-    </template>
+    </template> -->
 
     <!-- UserWatchList -->
-    <section id="watch-list">
+    <section id="headline">
       <FakeWatchList :companies="[symbol]">
         <template v-slot:default="{data}">
           <WatchListItem :data="data[0]">
@@ -59,16 +59,16 @@ export default {
     error: null,
   }),
 
-  beforeRouteEnter(to, from, next) {
-    // simulating a invalid request
+  // beforeRouteEnter(to, from, next) {
+  //   // simulating a invalid request
 
-    if (to.params.symbol === "IBM") next();
-    else {
-      next((vm) => {
-        vm.error = new Error(`Invalid Symbol ${vm.symbol}`);
-      });
-    }
-  },
+  //   if (to.params.symbol === "IBM") next();
+  //   else {
+  //     next((vm) => {
+  //       vm.error = new Error(`Invalid Symbol ${vm.symbol}`);
+  //     });
+  //   }
+  // },
 
   methods: {
     backToDashboard() {

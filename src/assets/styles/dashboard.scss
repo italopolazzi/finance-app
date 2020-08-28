@@ -1,7 +1,8 @@
 .dashboard-page,
 .dashboard-symbol {
     display: grid;
-    grid-template-areas: "headline historical" "watch trend" "top top";
+    grid-gap: var(--size100);
+    grid-template-areas: "headline historical" "watch watch" "top top";
     grid-template-columns: 60% 40%;
     grid-template-rows: auto auto auto;
 }
@@ -14,10 +15,6 @@
     grid-area: historical;
 }
 
-#trend-line {
-    grid-area: trend;
-}
-
 #top-companies {
     grid-area: top;
 }
@@ -26,10 +23,22 @@
     grid-area: watch;
 }
 
+#historical-data .stock-request {
+    display: flex;
+    flex-flow: row nowrap;
+    overflow-x: auto;
+}
+
+.section-title {
+    color: var(--color-light-opacity);
+    font-size: 4em;
+    display: table-caption;
+}
+
 @media (max-width: #{$lg+"px"}) {
     .dashboard-page {
-        grid-template-areas: "headline" "watch" "historical" "trend" "top";
-        grid-template-columns: 1fr;
+        grid-template-areas: "headline" "historical" "watch" "top";
+        grid-template-columns: 100%;
         grid-template-rows: auto auto auto;
     }
 }
