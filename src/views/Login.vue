@@ -12,14 +12,11 @@ import LoginForm from "@/components/Login/LoginForm.vue";
 
 export default {
   name: "login-page",
-  components: { LoginForm },
+  components: { LoginForm }
 };
 </script>
 
 <style lang="scss" scoped>
-
-
-
 .login-page {
   display: grid;
   grid-template-areas: "image form";

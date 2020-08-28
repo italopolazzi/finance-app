@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <template v-if="haveMessages">
-      <Dialog :value="message" :dialog-title="message.text">
-        <CustomButton @click="backToDashboard">Back to dashboard</CustomButton>
-      </Dialog>
+      <Toasts v-model="globalMessages" />
     </template>
 
     <Toolbar id="nav">
