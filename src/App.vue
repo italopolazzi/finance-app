@@ -1,18 +1,35 @@
 <template>
-  <div id="app">
+  <div id="app" class="dark">
     <template v-if="haveMessages">
       <Toasts v-model="globalMessages" />
     </template>
 
     <Toolbar id="nav">
-      <ul>
+      <div class="toolbar-item">
+        <Logo />
+        <div class="toolbar-title">
+          <h1>FinanceApp</h1>
+          <p>Stock trader market updates</p>
+        </div>
+      </div>
+
+      <ul class="toolbar-item">
         <li>
-          <router-link to="/">Home</router-link>
+          <router-link to="/dashboard">
+            <CustomButton color="light">Dashboard</CustomButton>
+          </router-link>
         </li>
+
         <li>
-          <router-link to="/dashboard">Dashboard</router-link>
+          <router-link to="/">
+            <CustomButton color="light">Login</CustomButton>
+          </router-link>
         </li>
       </ul>
+
+      <!-- <div class="toolbar-item">
+        <CustomButton color="light">Dark</CustomButton>
+      </div> -->
     </Toolbar>
 
     <Container id="main-content">
@@ -22,10 +39,16 @@
 </template>
 
 <script>
+import Logo from "@/components/commom/Logo.vue";
+
 import { mapState } from "vuex";
 
 export default {
   name: "app",
+
+  components: {
+    Logo,
+  },
 
   computed: {
     ...mapState(["globalMessages"]),
@@ -37,6 +60,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.toolbar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-title h1 {
+  font-weight: 100;
+}
+
+.toolbar-title p {
+  font-size: var(--text-caption);
+  margin-top: var(--size025);
+  font-weight: normal;
+  color: var(--color-accent);
+}
+
 #nav {
   z-index: 50;
 }
