@@ -39,7 +39,7 @@ export default {
           if (!data) throw Error("No data received");
 
           const sortByPrice = (company1, company2) => {
-            const priceToFloat = (company) => parseFloat(company.price);
+            const priceToFloat = (companyData) => parseFloat(companyData.price);
             return priceToFloat(company2) - priceToFloat(company1);
           };
 

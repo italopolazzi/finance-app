@@ -45,11 +45,7 @@
           <List :items="data">
             <template v-slot:item="{data}">
               <WatchListItem :data="data">
-                <CustomButton
-                  @click="removeCompanyFromWatchList(data.code)"
-                  slot="action"
-                  color="dark"
-                >Remove</CustomButton>
+                <PushPopWatchListButton :company-code="data.code" slot="action" />
               </WatchListItem>
             </template>
           </List>
@@ -70,10 +66,12 @@ import IndexMainCompanies from "@/components/Dashboard/IndexMainCompanies.vue";
 // import UserWatchList from "@/components/Dashboard/UserWatchList.vue";
 import WatchListItem from "@/components/Dashboard/WatchListItem.vue";
 
+import PushPopWatchListButton from "@/components/commom/PushPopWatchListButton.vue";
+
 import CandlestickChart from "@/components/commom/CandlestickChart.vue";
 import LineChart from "@/components/commom/LineChart.vue";
 
-import { mapGetters, mapState, mapActions } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 import "@/assets/styles/dashboard.scss";
 
@@ -88,6 +86,7 @@ export default {
     // UserWatchList,
     WatchListItem,
 
+    PushPopWatchListButton,
     CandlestickChart,
     LineChart,
   },
@@ -95,18 +94,6 @@ export default {
   computed: {
     ...mapState("user", ["watchList"]),
     ...mapGetters("auth", ["isAuthenticated"]),
-    watchListFetchOptions() {
-      const headers = new Headers();
-      headers.append("pragma", "no-cache");
-      headers.append("cache-control", "no-cache");
-
-      const fetchOptions = {
-        method: "GET",
-        headers: headers,
-      };
-
-      return fetchOptions;
-    },
   },
 
   data: () => ({
@@ -122,7 +109,6 @@ export default {
   }),
 
   methods: {
-    ...mapActions("user", ["removeCompanyFromWatchList"]),
     handleTableRowAction(item) {
       this.$router.push({
         name: "dashboard-symbol",

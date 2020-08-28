@@ -33,44 +33,44 @@ const store = {
                 state[key] = null
             })
         },
-        PUSH_WATCHLIST(state, company) {
-            state.watchList = [...state.watchList, company]
+        PUSH_WATCHLIST(state, companyCode) {
+            state.watchList = [...state.watchList, companyCode]
         },
-        POP_WATCHLIST(state, company) {
-            const filtered = [...state.watchList].filter(v => v !== company)
+        POP_WATCHLIST(state, companyCode) {
+            const filtered = [...state.watchList].filter(v => v !== companyCode)
             state.watchList = [...filtered]
         }
     },
     // actions
     actions: {
-        async addCompanyToWatchList({ dispatch, commit, getters, rootGetters }, company) {
+        async addCompanyToWatchList({ dispatch, commit, getters, rootGetters }, companyCode) {
             try {
                 const isAuthenticated = rootGetters["auth/isAuthenticated"]
                 if (!isAuthenticated) throw Error("User not authenticated!")
-                if (getters.isCompanyWatched(company)) throw Error("Company already listed in watch list!")
+                if (getters.isCompanyWatched(companyCode)) throw Error("Company already listed in watch list!")
 
                 const message = await simulateResolveRequest({
                     text: "Company added to watch list"
                 })
 
-                commit("PUSH_WATCHLIST", company)
+                commit("PUSH_WATCHLIST", companyCode)
 
                 dispatch("pushGlobalSuccessMessage", message.text, { root: true })
             } catch (error) {
                 dispatch("pushGlobalErrorMessage", error.message, { root: true })
             }
         },
-        async removeCompanyFromWatchList({ dispatch, commit, getters, rootGetters }, company) {
+        async removeCompanyFromWatchList({ dispatch, commit, getters, rootGetters }, companyCode) {
             try {
                 const isAuthenticated = rootGetters["auth/isAuthenticated"]
                 if (!isAuthenticated) throw Error("User not authenticated!")
-                if (!getters.isCompanyWatched(company)) throw Error("Company not listed in watch list!")
+                if (!getters.isCompanyWatched(companyCode)) throw Error("Company not listed in watch list!")
 
 
                 const message = await simulateResolveRequest({
                     text: "Company removed from watch list"
                 })
-                commit("POP_WATCHLIST", company)
+                commit("POP_WATCHLIST", companyCode)
 
                 dispatch("pushGlobalSuccessMessage", message.text, { root: true })
             } catch (error) {
@@ -86,8 +86,8 @@ const store = {
     },
     // getters
     getters: {
-        isCompanyWatched: state => company => {
-            return state.watchList.includes(company)
+        isCompanyWatched: state => companyCode => {
+            return state.watchList.includes(companyCode)
         }
     }
 }
